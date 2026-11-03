@@ -5,45 +5,45 @@ import objets.Chaudron;
 
 public class Druide {
 
-    private String nom;
-    private int force;
-    private Chaudron chaudron = new Chaudron();
-    public Druide(String nom, int force) {
-        this.nom = nom;
-        this.force = force;
-    }
+	private String nom;
+	private int force;
+	private Chaudron chaudron = new Chaudron();
 
-    public void parler(String texte) {
-        System.out.println(prendreParole() + "\"" + texte + "\"");
-    }
+	public Druide(String nom, int force) {
+		this.nom = nom;
+		this.force = force;
+	}
 
-    private String prendreParole() {
-        return "Le Druide " + nom + " : ";
-    }
+	public void parler(String texte) {
+		System.out.println(prendreParole() + "\"" + texte + "\"");
+	}
 
-    public void fabriquerPotion(int quantite, int forcePotion) {
-        chaudron.remplirChaudron(quantite, forcePotion);
+	private String prendreParole() {
+		return "Le Druide " + nom + " : ";
+	}
 
-        parler("J'ai concocte " + quantite
-                + " doses de potion magique. Elle a une force de "
-                + forcePotion + ".");
-    }
+	public void fabriquerPotion(int quantite, int forcePotion) {
+		chaudron.remplirChaudron(quantite, forcePotion);
 
+		parler("J'ai concocte " + quantite + " doses de potion magique. Elle a une force de " + forcePotion + ".");
+	}
 
-    public void booster(Gaulois gaulois) {
-        if (gaulois.getNom().equals("Obélix")) {
-           parler("Non, Obélix Non !... Et tu le sais tres bien !");
-        } else {
-            parler("Tiens " + gaulois.getNom() + " un peu de potion magique.");
-            int forcePotion = chaudron.prendreLouche();
+	public void booster(Gaulois gaulois) {
+		String nomGaulois= gaulois.getNom();
+				
+		if (nomGaulois!=null && nomGaulois.equals("Obélix")) {
+			parler("Non, Obelix Non !... Et tu le sais tres bien !");
+		} else {
+			parler("Tiens " + nomGaulois + " un peu de potion magique.");
+			int forcePotion = chaudron.prendreLouche();
 
-            if (forcePotion > 0) {
-                gaulois.boirePotion(forcePotion);
-            }
-          }
-    }
+			if (forcePotion > 0) {
+				gaulois.boirePotion(forcePotion);
+			}
+		}
+	}
 
-    public String getNom() {
-        return nom;
-    }
+	public String getNom() {
+		return nom;
+	}
 }
